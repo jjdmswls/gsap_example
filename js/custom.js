@@ -41,14 +41,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const commonScrollTrigger = {
     header: {
       // 컨트롤러 등록(요소, 시작점, 끝나는점, 스크롤 동기화 여부 등)
-      trigger: '.header', // 애니메이션 시작점과 끝나는 지점의 기준
-      start: 'top top', // 첫번째는 요소의 시작 위치, 두번째는 화면의 시작 위치
+      trigger: ".header", // 애니메이션 시작점과 끝나는 지점의 기준
+      start: "top top", // 첫번째는 요소의 시작 위치, 두번째는 화면의 시작 위치
       scrub: 1.8, // 스크롤 동기화 여부, true일 경우 스크롤 타이밍에 맞춰 애니메이션 실행, 시간 적용 시 지정된 시간 만큼 지연 후 애니메이션 실행
       // markers: true, // 디버깅을 위한 마커 표시
     },
     about: {
-      trigger: '.about',
-      start: 'top bottom',
+      trigger: ".about",
+      start: "top bottom",
+      scrub: 1.8,
+    },
+    benefits: {
+      trigger: ".benefits_lists",
+      start: "top bottom",
       scrub: 1.8,
     },
   };
@@ -123,35 +128,29 @@ document.addEventListener('DOMContentLoaded', function () {
       scale: 1.6,
     });
 
-    tl.to(".about_text", {
+    tl.to(".about-text", {
       scrollTrigger: commonScrollTrigger.about,
       yPercent:50,
     });
   }
 
-   
-
   aboutAnimation();
 
   function benefitsAnimation() {
     const benefits_nums = gsap.utils.toArray(".benefits_num");
-    console.log(benefits_num);
+    // console.log(benefits_nums);
     benefits_nums.forEach((num) => {
       const data_speed = num.getAttribute('data-speed');
-      console.log(data_speed);
+      //console.log(1 - parseFloat(data_speed));
+
+      tl.from(num, {
+        scrollTrigger: commonScrollTrigger.benefits,
+        x: -data_speed,
+      });
     })
 
+  
   }
-
-
-
-
-
-
-
-
-
-
 
   benefitsAnimation();
 
